@@ -16,6 +16,11 @@ Managing a high volume of workstations manually is prone to human error and miss
 - **Hardware Health API:** A mock backend that simulates live health status updates.
 - **Multi-site Organization:** Designed for distributed environments with 150+ nodes.
 
+  ## 📊 Project Metrics
+- **Assets Managed:** 150+
+- **Health Indicators:** 3 Levels (Healthy, Warning, Critical)
+- **API Response Time:** < 50ms (Mocked)
+
 ## 🚀 Installation & Setup
 1. **Clone the repository:**
    `git clone github.com`
@@ -23,6 +28,11 @@ Managing a high volume of workstations manually is prone to human error and miss
    `cd server && npm install`
 3. **Setup Client:**
    `cd client && npm install`
+
+   ## 📈 Current Progress
+- [x] **Scalable Backend:** Node.js server dynamically generates 150+ mock assets.
+- [x] **Modern UI:** Implemented Tailwind CSS v4 for a responsive, enterprise-grade dashboard.
+- [x] **Live Data Fetching:** Frontend successfully consumes REST API endpoints with status-based filtering.
 
 ## 📊 Roadmap
 - [ ] Implement JWT Authentication
