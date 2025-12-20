@@ -1,34 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [workstations, setWorkstations] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch data from your Node.js server (Port 5001)
+    fetch('http://localhost:5001/api/workstations')
+      .then((res) => res.json())
+      .then((data) => {
+        setWorkstations(data);
+        setLoading(false);
+      })
+      .catch((err) => console.error("Error fetching data:", err));
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="dashboard-container">
+      <h1>Hardware Inventory Dashboard</h1>
+      <p>Managing 150+ workstations across multiple sites</p>
+
+      {loading ? (
+        <p>Loading asset data...</p>
+      ) : (
+        <table border="1" style={{ width: '100%', marginTop: '20px', textAlign: 'left' }}>
+          <thead>
+            <tr>
+              <th>Asset Name</th>
+              <th>Health Status</th>
+              <th>Warranty Expiration</th>
+            </tr>
+          </thead>
+          <tbody>
+            {workstations.map((asset) => (
+              <tr key={asset.id}>
+                <td>{asset.name}</td>
+                <td>{asset.status}</td>
+                <td>{asset.warranty}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
   )
 }
 
